@@ -1,4 +1,6 @@
 tele.session
+tests.txt
+tests.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
