@@ -1,0 +1,6 @@
+cryptg==0.4.0
+pyaes==1.6.1
+pyasn1==0.4.8
+rsa==4.9
+telegram-cloud==1.4.4
+Telethon==1.26.0
