@@ -1,10 +1,25 @@
 import os
 import platform
+import configparser
 
 mode = "upload"
-name = "tele"
 user_name = "me"
 
+if not os.path.exists("config.ini"):
+    config = configparser.ConfigParser()
+    config["DEFAULT"] = {}
+    
+    unique_name = input("Enter the unique name: ")
+    config["DEFAULT"]["UNIQUE_NAME"] = unique_name
+    
+    with open("config.ini", "w") as config_file:
+        config.write(config_file)
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+UNIQUE_NAME = config["DEFAULT"]["UNIQUE_NAME"]  
+    
 total_size = 0
 
 if platform.system() == "Windows":
@@ -16,7 +31,7 @@ while True:
     path_input = input("Enter the File Path: ")
     count = 0
     if os.path.isfile(path_input):
-        os.system(f"tgcloud -m {mode} -n {name} -u {user_name} -p {path_input}")
+        os.system(f"tgcloud -m {mode} -n {UNIQUE_NAME} -u {user_name} -p {path_input}")
         file_size = os.path.getsize(path_input)
         total_size += file_size
         count += 1
@@ -28,7 +43,7 @@ while True:
         for x in list_os:
             whole_path = path_input + file_loc + x
             if os.path.isfile(whole_path):
-                os.system(f"tgcloud -m {mode} -n {name} -u {user_name} -p \"{whole_path}\"")
+                os.system(f"tgcloud -m {mode} -n {UNIQUE_NAME} -u {user_name} -p \"{whole_path}\"")
                 file_size = os.path.getsize(whole_path)
                 total_size += file_size
                 count += 1
