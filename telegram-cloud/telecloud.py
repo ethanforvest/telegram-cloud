@@ -43,11 +43,11 @@ while True:
         for x in list_os:
             whole_path = path_input + file_loc + x
             if os.path.isfile(whole_path):
+                print(f"Current Process --> {count + 1}/{list_os_files_len}")
                 os.system(f"tgcloud -m {mode} -n {UNIQUE_NAME} -u {user_name} -p \"{whole_path}\"")
                 file_size = os.path.getsize(whole_path)
                 total_size += file_size
                 count += 1
-                print(f"{count}/{list_os_files_len}")
                 
     total_size_kb = total_size / 1024   
     total_size_mb = total_size_kb / 1024   
