@@ -1,6 +1,8 @@
 import os
 import platform
 import configparser
+import time
+import datetime
 
 mode = "upload"
 user_name = "me"
@@ -30,6 +32,7 @@ elif platform.system() == "Linux" or platform.system() == "Linux2":
 while True:
     path_input = input("Enter the File/Folder Path: ")
     count = 0
+    time_start = time.time()
     if os.path.isfile(path_input):
         os.system(f"tgcloud -m {mode} -n {UNIQUE_NAME} -u {user_name} -p {path_input}")
         file_size = os.path.getsize(path_input)
@@ -49,7 +52,26 @@ while True:
                 total_size += file_size
                 count += 1
                 print("\n")
-                
+    
+    time_end = time.time()
+    time_sec = time_end - time_start
+    
+    def sec_converter(sec):
+        timedelta = str(datetime.timedelta(seconds=sec))
+        return timedelta[5:7]
+
+    def min_converter(sec):
+        timedelta = str(datetime.timedelta(seconds=sec))
+        return timedelta[2:4]
+        
+    def hr_converter(sec):
+        timedelta = str(datetime.timedelta(seconds=sec))
+        return timedelta[0]
+        
+    hr = hr_converter(time_sec)
+    minu = min_converter(time_sec)
+    sec = sec_converter(time_sec)
+      
     total_size_kb = total_size / 1024   
     total_size_mb = total_size_kb / 1024   
     if total_size_mb < 1:
@@ -58,7 +80,7 @@ while True:
     elif total_size_mb > 1:
         total_size_mb = round(total_size_mb, 2)
         total_size = f"{total_size_mb} MB" 
-    print(f"Total Uploads: {count} | Total Size: {total_size}")
+    print(f"Total Uploads: {count} | Total Size: {total_size} | Runtime (H:M:S): {hr}:{minu}:{sec}")
     total_size = 0  
     print("\n")    
        
