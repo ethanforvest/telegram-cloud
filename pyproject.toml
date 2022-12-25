@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "telegram-cloud"
+version = "0.1.0"
+description = ""
+authors = ["'EthanForvest' <'91059346+ethanforvest@users.noreply.github.com'>"]
+readme = "README.md"
+packages = [{include = "telegram_cloud"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
